@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('partials/encabezado.html');%>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Acerca de</a>
+          <a class="nav-item nav-link" href="#">Pago de Recibo</a>
+          <a class="nav-item nav-link" href="#">Contacto</a>
+        </div>
+    </nav>
+        <br>
+<%
+
+                let subtotal = 0;
+                let impuesto = 0;
+                let descuento = 0;
+                let totalPagar = 0;
+
+                if(tipoServicio == 1){
+                    subtotal = kilowatts * 1.08;
+                }
+                else if(tipoServicio == 2){
+                    subtotal = kilowatts * 2.5;
+                }
+                else if(tipoServicio == 3){
+                    subtotal = kilowatts * 3.0;
+                }
+
+                if(kilowatts <= 1000){
+                    descuento = subtotal * .10;
+                }
+                else if(kilowatts > 1000 && kilowatts <= 10000){
+                    descuento = subtotal * .20;
+                }
+                else if(kilowatts > 10000){
+                    descuento = subtotal * .50;
+                }
+
+                impuesto =  subtotal * 0.16;
+                totalPagar = (subtotal + impuesto) - descuento;
+                servicio = ""
+                costo = 0
+                
+                if(tipoServicio == 1){
+                    servicio = "Domicilio"
+                    costo = 1.08;
+                }
+                else if(tipoServicio == 2){
+                    servicio = "Comercial"
+                    costo = 2.5;
+                }
+                else if(tipoServicio == 3){
+                    servicio = "Industrial"
+                    costo = 3.0;
+                }
+
+              %>
+              <table class="table table-hover">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo Servicio</th>
+                    <th>Kilowatss Consumidos</th>
+                    <th>Costo por Kilowatts</th>
+                </tr>
+                <tr>
+                    <td><%=nombre%></td>
+                    <td><%=servicio%></td>
+                    <td><%=kilowatts%></td>
+                    <td><%=costo%></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Subtotal:</td>
+                    <td><%=subtotal%></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Impuesto:</td>
+                    <td><%=impuesto%></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Descuento:</td>
+                    <td><%=descuento%></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total a Pagar:</td>
+                    <td><%=totalPagar%></td>
+                </tr>
+            </table>
+
+</body>
+<%-include('partials/piePagina.html');%>
+</html>

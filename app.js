@@ -20,7 +20,7 @@ app.use((req,res,next)=>{
     res.status(404).sendFile(__dirname + '/public/error.html');
 })
 
-const port = 3000
+const port = 600
 app.listen(port,()=>{
-    console.log('Inciado el puerto 3000')
+    console.log('Inciado el puerto 600')
 })
